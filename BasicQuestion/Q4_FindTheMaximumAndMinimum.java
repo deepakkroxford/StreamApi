@@ -1,6 +1,5 @@
 package BasicQuestion;
 import java.util.*;
-import java.util.stream.*;
 
 public class Q4_FindTheMaximumAndMinimum {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package BasicQuestion;
 import java.util.*;
-import java.util.stream.*;
+
 
 public class Q7_FindTheSumOfAllNumber {
     public static void main(String[] args) {
