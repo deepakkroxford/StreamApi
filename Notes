@@ -1,0 +1,160 @@
+@Introduction.java
+What is Stream Api ? And give some example how to use and advantages of using?
+Sol:-
+
+Stream API in Java:
+Stream API is a powerful feature introduced in Java 8 that provides a modern way to process collections of objects. It enables functional-style operations on streams of elements, such as map-reduce transformations on collections.
+
+Key Characteristics:
+1. Not a data structure - it's a view of data
+2. Doesn't modify the original data source
+3. Lazy evaluation - operations are only performed when needed
+4. Can be used only once
+
+Examples of Stream API Usage:
+
+1. Basic Stream Operations:
+```java
+List<Integer> numbers = Arrays.asList(1, 4, 21, 42, 12);
+
+// Filter even numbers and double them
+List<Integer> result = numbers.stream()
+    .filter(n -> n % 2 == 0)    // Keep only even numbers
+    .map(n -> n * 2)            // Double each number
+    .collect(Collectors.toList()); // Collect results
+```
+
+2. Aggregate Operations:
+```java
+// Find sum of numbers
+int sum = numbers.stream()
+    .reduce(0, (a, b) -> a + b);
+
+// Find maximum number
+int max = numbers.stream()
+    .max(Integer::compareTo)
+    .orElse(0);
+```
+
+3. Collection Operations:
+```java
+// Convert to different collections
+Set<Integer> asSet = numbers.stream()
+    .collect(Collectors.toSet());
+
+String joined = numbers.stream()
+    .map(String::valueOf)
+    .collect(Collectors.joining(", "));
+```
+
+Advantages of Using Stream API:
+
+1. Declarative Programming:
+   - More readable and maintainable code
+   - Focus on "what" needs to be done rather than "how"
+
+2. Improved Performance:
+   - Parallel processing capability (parallelStream())
+   - Lazy evaluation for better efficiency
+
+3. Less Boilerplate Code:
+   - Reduces the amount of code needed for collection processing
+   - Chain multiple operations in a single statement
+
+4. Better Abstraction:
+   - Hides complex iteration logic
+   - Provides functional programming concepts
+
+5. Thread Safety:
+   - Immutable operations ensure thread safety
+   - Parallel processing without explicit thread handling
+
+6. Built-in Optimization:
+   - Short-circuit operations (findFirst, findAny)
+   - Lazy evaluation prevents unnecessary computations
+
+7. Flexible Operations:
+   - Rich set of methods for data manipulation
+   - Easy to combine multiple operations
+
+Common Stream Operations:
+1. Intermediate Operations:
+   - filter() - filtering elements
+   - map() - transforming elements
+   - sorted() - sorting elements
+   - distinct() - removing duplicates
+   - limit() - limiting stream size
+   - skip() - skipping elements
+
+2. Terminal Operations:
+   - collect() - collecting results
+   - count() - counting elements
+   - min()/max() - finding extremes
+   - forEach() - iterating elements
+   - reduce() - reducing to single value
+   - anyMatch()/allMatch()/noneMatch() - checking conditions
+
+Best Practices:
+1. Use streams for data processing, not for side effects
+2. Prefer method references over lambda expressions when possible
+3. Use parallel streams carefully, considering overhead
+4. Close streams that use IO resources
+5. Don't reuse streams - they can be consumed only once 
+
+
+Q2 What is the main diffrence between the terminal and intermediate operations?
+The main differences between terminal and intermediate operations are:
+
+1. Execution Timing:
+   - Intermediate operations are lazy (not executed immediately)
+   - Terminal operations trigger the actual execution of the stream pipeline
+
+2. Stream State:
+   - Intermediate operations return a new Stream
+   - Terminal operations consume the Stream and produce a final result
+
+3. Chaining:
+   - Multiple intermediate operations can be chained together
+   - Only one terminal operation can be used (ends the Stream)
+
+4. Examples:
+   Intermediate: map(), filter(), sorted()
+   - Can chain multiple: stream.map().filter().sorted()
+   
+   Terminal: collect(), count(), forEach() 
+   - Ends stream: stream.map().collect()
+   - Cannot use stream after terminal operation
+
+Think of it like building and running a factory line:
+- Intermediate ops are like adding sorting/processing stations (setup)
+- Terminal op is like starting the line to process items (execution)
+
+Complete List of Operations:
+
+Intermediate Operations:
+- map() - Transform elements
+- filter() - Filter elements based on condition
+- sorted() - Sort elements
+- distinct() - Remove duplicates
+- limit() - Restrict stream size
+- skip() - Skip elements
+- peek() - Perform action on elements while keeping stream
+- flatMap() - Transform and flatten elements
+- mapToInt/Long/Double() - Convert to primitive streams
+- boxed() - Convert primitive to object stream
+
+Terminal Operations:
+- collect() - Gather results into a collection
+- count() - Count elements
+- min() - Get minimum element
+- max() - Get maximum element
+- forEach() - Process each element
+- forEachOrdered() - Process elements in order
+- toArray() - Convert to array
+- reduce() - Combine elements
+- findFirst() - Get first element
+- findAny() - Get any element
+- anyMatch() - Check if any match
+- allMatch() - Check if all match
+- noneMatch() - Check if none match
+
